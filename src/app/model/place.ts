@@ -22,4 +22,8 @@ export class Place {
         this.types = data.types;
         this.vicinity = data.vicinity;
     }
+
+    getName(): string { return this.name }
+    getIcon(): string { return this.icon }
+    getTypes(): string[] { return this.types }
 }
