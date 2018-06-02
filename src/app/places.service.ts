@@ -23,6 +23,7 @@ export class PlacesService {
       .pipe(map(results => {
         let places = [];
 
+        console.log("results %o", results);
         for (const key in results) {
           places.push(new Place(results[key]));
         }

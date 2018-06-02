@@ -35,7 +35,7 @@ import { MAT_LABEL_GLOBAL_OPTIONS } from '@angular/material';
     AppRoutingModule
   ],
   providers: [
-    { provide: MAT_LABEL_GLOBAL_OPTIONS, useValue: { float: 'always' } }
+    // { provide: MAT_LABEL_GLOBAL_OPTIONS, useValue: { float: 'always' } }
   ],
   bootstrap: [AppComponent]
 })
