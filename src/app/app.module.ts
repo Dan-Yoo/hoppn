@@ -14,6 +14,7 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { SpinnerComponent } from './ui/spinner/spinner.component';
+import { MAT_LABEL_GLOBAL_OPTIONS } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,9 @@ import { SpinnerComponent } from './ui/spinner/spinner.component';
     ReactiveFormsModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    { provide: MAT_LABEL_GLOBAL_OPTIONS, useValue: { float: 'always' } }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

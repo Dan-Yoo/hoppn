@@ -3,6 +3,7 @@
 
 html, body {
     margin: 0;
+    background: rgba(245, 245, 245, 1);
 }
 
 * {
