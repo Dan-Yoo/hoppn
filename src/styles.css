@@ -4,3 +4,33 @@
 html, body {
     margin: 0;
 }
+
+* {
+    box-sizing: border-box;
+}
+
+.fx-container {
+  margin-right: auto;
+  margin-left: auto;
+  padding: 0 1rem;
+  width: 100%;
+}
+/*xs*/
+@media (min-width: 599px) { .fx-container {padding: 0 2rem} }
+/*sm*/
+@media (min-width: 959px) { .fx-container {padding: 0 3rem;}  }
+/*md*/
+@media (min-width: 1279px) { .fx-container {padding: 0 4rem;} }
+/*lg*/
+@media (min-width: 1919px) { .fx-container {padding: 0 6rem;} }
+
+main { margin: 2rem 0 }
+
+.center { margin: 0 auto }
+
+
+
+/*
+    ANGULAR MATERIAL OVERRIDES
+*/
+.mat-form-field { width: 100% }
