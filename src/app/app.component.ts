@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { PlacesService } from './places.service';
 import { Place } from 'src/app/model/place';
 import { Observable } from 'rxjs';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -10,15 +11,7 @@ import { Observable } from 'rxjs';
 })
 export class AppComponent {
   title = 'Hoppn';
-  places: Observable<Place[]>;
+  showSpinner = false;
 
-  constructor(private placesService: PlacesService) {
-    this.places = this.placesService.getPlacesNearby({
-      location: JSON.stringify([45.493129599999996, -73.6414329]),
-      radius: '2000'
-    });
-
-    // this.placesService.getPlaceDetail({ placeid: 'ChIJCT3qZGoayUwRmPk37VHZSRY' })
-    //   .subscribe(place => console.log('%o', place));
-  }
+  constructor() {}
 }
