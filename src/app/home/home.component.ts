@@ -12,6 +12,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 export class HomeComponent implements OnInit {
 
   places: Observable<any>;
+  test: Place;
 
   placeSearchForm: FormGroup;
   long: number = -73.56;
@@ -20,8 +21,12 @@ export class HomeComponent implements OnInit {
 
   constructor(private placesService: PlacesService,
     private fb: FormBuilder) {
-    this.placesService.getPlaceDetail({ placeid: 'ChIJCT3qZGoayUwRmPk37VHZSRY' })
-      .subscribe(place => console.log('%o', place));
+    // this.placesService.getPlaceDetail({ placeid: 'ChIJCT3qZGoayUwRmPk37VHZSRY' })
+    //   .subscribe(place => {
+    //     this.getPhoto(place.getPhotoRef()).subscribe(res => {
+    //       console.log("PHOTO REFERENCE RESULT? %o",res);
+    //     });
+    //   });
 
     this.placeSearchForm = this.fb.group({
       long: [this.long, null],
@@ -45,6 +50,13 @@ export class HomeComponent implements OnInit {
         long: position.coords.longitude,
         lat: position.coords.latitude
       })
+    });
+  }
+
+  getPhoto(photoref: string) {
+    this.placesService.getPlacePhoto({
+      photoreference: photoref,
+      maxwidth: 400
     });
   }
 

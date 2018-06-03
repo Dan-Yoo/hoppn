@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { AuthenticationService } from '../authentication.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,9 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
   constructor(private fb: FormBuilder,
-              private auth: AuthenticationService) { }
+              private authService: AuthenticationService,
+              private snackBar: MatSnackBar) 
+  {}
 
   ngOnInit() {
     this.loginForm = this.fb.group({
@@ -22,7 +25,12 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    this.auth.login(this.loginForm.value.email, this.loginForm.value.passsword);
+    this.authService.login(this.loginForm.value.email, this.loginForm.value.password)
+      .then(res => {
+        this.snackBar.open('Successfully logged in');
+      }, err => {
+        this.snackBar.open('A problem occured while trying to log in (specify the problem here later)');
+      });
   }
 
 }
