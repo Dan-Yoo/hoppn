@@ -3,7 +3,7 @@ export class Place {
     private icon: string;
     private id: string;
     private name: string;
-    private photos: any;
+    private photos: any[];
     private place_id: string;
     private reference: string;
     private scope: string;
@@ -26,4 +26,12 @@ export class Place {
     getName(): string { return this.name }
     getIcon(): string { return this.icon }
     getTypes(): string[] { return this.types }
+    getPhotoRef(): string {
+        // return this.photos[0].photo_reference;
+        if (!this.photos) return "NO PHOTOS";
+
+        for (let i = 0; i < this.photos.length; i++) {
+            return this.photos[i].photo_reference;
+        }
+    }
 }

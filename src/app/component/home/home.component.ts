@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { PlacesService } from '../places.service';
 import { Place } from 'src/app/model/place';
 import { Observable } from 'rxjs';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { PlacesService } from 'src/app/service/places.service';
 
 @Component({
   selector: 'app-home',
@@ -11,18 +11,16 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 })
 export class HomeComponent implements OnInit {
 
-  places: Observable<Place[]>;
+  places: Observable<any>;
+  test: Place;
 
   placeSearchForm: FormGroup;
-  long: number = 127.024612;
-  lat: number = -37.532600;
-  radius: number = 2000;
+  long: number = -73.56;
+  lat: number = 45.5016896;
+  radius: number = 500;
 
   constructor(private placesService: PlacesService,
     private fb: FormBuilder) {
-    // this.placesService.getPlaceDetail({ placeid: 'ChIJCT3qZGoayUwRmPk37VHZSRY' })
-    //   .subscribe(place => console.log('%o', place));
-
     this.placeSearchForm = this.fb.group({
       long: [this.long, null],
       lat: [this.lat, null],
@@ -31,16 +29,12 @@ export class HomeComponent implements OnInit {
   }
 
   findPlaces() {
-    this.placeSearchForm = this.fb.group({
-      long: [this.long, null],
-      lat: [this.lat, null],
-      radius: [this.radius, null]
-    });
+    let value = this.placeSearchForm.value;
 
-    // this.places = this.placesService.getPlacesNearby({
-    //   location: JSON.stringify([this.long, this.lat]),
-    //   radius: this.radius
-    // });
+    this.places = this.placesService.getPlacesNearby({
+      location: JSON.stringify([value.lat, value.long]),
+      radius: value.radius
+    });
   }
 
   useCurrentLocation() {
@@ -49,6 +43,13 @@ export class HomeComponent implements OnInit {
         long: position.coords.longitude,
         lat: position.coords.latitude
       })
+    });
+  }
+
+  getPhoto(photoref: string) {
+    this.placesService.getPlacePhoto({
+      photoreference: photoref,
+      maxwidth: 400
     });
   }
 

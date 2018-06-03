@@ -3,6 +3,7 @@
 
 html, body {
     margin: 0;
+    background: rgba(245, 245, 245, 1);
 }
 
 * {
@@ -33,4 +34,4 @@ main { margin: 2rem 0 }
 /*
     ANGULAR MATERIAL OVERRIDES
 */
-.mat-form-field { width: 100% }
+/* .mat-form-field { width: 100% } */
