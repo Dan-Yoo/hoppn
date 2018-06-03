@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { PlacesService } from './places.service';
 import { Place } from 'src/app/model/place';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @Component({
   selector: 'app-root',
@@ -10,15 +12,9 @@ import { Observable } from 'rxjs';
 })
 export class AppComponent {
   title = 'Hoppn';
-  places: Observable<Place[]>;
+  // move spinenr component in a better place later? (spinner should be showing whenever something loads when fetching or creating/editing)
+  showSpinner = false;
 
-  constructor(private placesService: PlacesService) {
-    this.places = this.placesService.getPlacesNearby({
-      location: JSON.stringify([45.493129599999996, -73.6414329]),
-      radius: '2000'
-    });
-
-    // this.placesService.getPlaceDetail({ placeid: 'ChIJCT3qZGoayUwRmPk37VHZSRY' })
-    //   .subscribe(place => console.log('%o', place));
+  constructor() {
   }
 }

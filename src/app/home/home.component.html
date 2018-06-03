@@ -1,0 +1,45 @@
+<form [formGroup]="placeSearchForm" 
+      fxLayout="row wrap"
+      fxLayoutGap="5px"
+      fxLayoutAlign="start center"
+      style="margin-top: -1.5rem">
+  <mat-form-field appearance="outline">
+    <mat-label>Longitude</mat-label>
+    <input matInput type="number" formControlName="long">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Latitude</mat-label>
+    <input matInput type="number" formControlName="lat">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Radius (meters)</mat-label>
+    <input matInput type="number" formControlName="radius">
+  </mat-form-field>
+
+  <button fxFlex="nogrow" mat-raised-button color="primary" (click)="findPlaces()">Search</button>
+  <button mat-raised-button color="primary" (click)="useCurrentLocation()">Use Current Location</button>
+</form>
+<mat-divider></mat-divider>
+
+<main>
+  <mat-grid-list cols="2" rowHeight="2:1">
+    <mat-grid-tile *ngFor="let place of places | async">
+      <mat-card style="width: 100%; margin: 1rem;">
+        <mat-card-header>
+          <div mat-card-avatar style="width: 25%">
+            <!-- <img style="max-height: 100%" src="{{ getPhoto(place.getPhotoRef()) }}"> -->
+          </div>
+          <mat-card-title>{{place.getName()}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          {{place.getTypes()}}
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button>SAVE</button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</main>
