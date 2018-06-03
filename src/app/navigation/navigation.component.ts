@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/authentication.service';
 import { MatSnackBar } from '@angular/material';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navigation',
@@ -11,6 +12,7 @@ export class NavigationComponent implements OnInit {
   loggedIn = false;
 
   constructor(private authService: AuthenticationService,
+              private router: Router,
               private snackBar: MatSnackBar) {
     this.authService.user$.subscribe(user => {
       this.loggedIn = user ? true : false;
@@ -22,6 +24,7 @@ export class NavigationComponent implements OnInit {
 
   logout() {
     this.authService.logout().then(res => {
+      this.router.navigate(['']);
       this.snackBar.open('Logged out');
     }, err => {
       this.snackBar.open('Problem logging out');

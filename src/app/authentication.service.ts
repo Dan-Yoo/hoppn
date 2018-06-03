@@ -8,12 +8,14 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private user = new BehaviorSubject<any>(null);
-  user$ = this.user.asObservable();
+  userSubject = new BehaviorSubject<any>(null);
+  user$ = this.userSubject.asObservable();
+  user = null;
 
   constructor(public afAuth: AngularFireAuth) { 
     this.afAuth.authState.subscribe((auth) => {
-      this.user.next(auth);
+      this.userSubject.next(auth);
+      this.user = auth;
     });
   }
 
