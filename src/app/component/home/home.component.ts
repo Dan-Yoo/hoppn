@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { PlacesService } from '../places.service';
 import { Place } from 'src/app/model/place';
 import { Observable } from 'rxjs';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { PlacesService } from 'src/app/service/places.service';
 
 @Component({
   selector: 'app-home',
@@ -21,13 +21,6 @@ export class HomeComponent implements OnInit {
 
   constructor(private placesService: PlacesService,
     private fb: FormBuilder) {
-    // this.placesService.getPlaceDetail({ placeid: 'ChIJCT3qZGoayUwRmPk37VHZSRY' })
-    //   .subscribe(place => {
-    //     this.getPhoto(place.getPhotoRef()).subscribe(res => {
-    //       console.log("PHOTO REFERENCE RESULT? %o",res);
-    //     });
-    //   });
-
     this.placeSearchForm = this.fb.group({
       long: [this.long, null],
       lat: [this.lat, null],

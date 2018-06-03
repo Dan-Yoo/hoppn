@@ -12,9 +12,9 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
-import { NavigationComponent } from './navigation/navigation.component';
-import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
+import { NavigationComponent } from './component/navigation/navigation.component';
+import { HomeComponent } from './component/home/home.component';
+import { LoginComponent } from './component/login/login.component';
 import { SpinnerComponent } from './ui/spinner/spinner.component';
 import { MAT_LABEL_GLOBAL_OPTIONS, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material';
 
@@ -40,7 +40,6 @@ import { MAT_LABEL_GLOBAL_OPTIONS, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angula
     AngularFireAuthModule
   ],
   providers: [
-    // { provide: MAT_LABEL_GLOBAL_OPTIONS, useValue: { float: 'always' } }
     { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 1500 } }
   ],
   bootstrap: [AppComponent]

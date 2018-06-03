@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-
-import { Place } from './model/place';
-import { PlaceDetail } from './model/placedetail';
+import { Place } from 'src/app/model/place';
+import { PlaceDetail } from 'src/app/model/placedetail';
 
 @Injectable({
   providedIn: 'root'

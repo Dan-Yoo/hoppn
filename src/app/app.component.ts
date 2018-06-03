@@ -1,9 +1,4 @@
 import { Component } from '@angular/core';
-import { PlacesService } from './places.service';
-import { Place } from 'src/app/model/place';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { AngularFireAuth } from 'angularfire2/auth';
 
 @Component({
   selector: 'app-root',
