@@ -4,12 +4,15 @@
       <mat-form-field appearance="outline">
         <mat-label>Email</mat-label>
         <input matInput formControlName="email">
+        <mat-error *ngIf="loginForm.controls.email.invalid">A valid email is required.</mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Password</mat-label>
         <input type="password" matInput formControlName="password">
+        <mat-error *ngIf="loginForm.controls.password.invalid">Password is #@%$@?.</mat-error>
       </mat-form-field>
-      <button type="submit" color="accent" mat-raised-button>Login</button>
+      <br>
+      <button type="submit" [disabled]="loginForm.invalid" color="accent" mat-raised-button>Login</button>
     </form>
   </mat-card>
 </section>

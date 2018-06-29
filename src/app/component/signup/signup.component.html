@@ -11,7 +11,8 @@
         <input type="password" matInput formControlName="password">
         <mat-error *ngIf="signupForm.controls.password.invalid">Password must be minimum 6 characters.</mat-error>
       </mat-form-field>
-      <button type="submit" [disabled]="!signupForm.valid" color="accent" mat-raised-button>Sign Up</button>
+      <br>
+      <button type="submit" [disabled]="signupForm.invalid" color="accent" mat-raised-button>Sign Up</button>
     </form>
   </mat-card>
 </section>

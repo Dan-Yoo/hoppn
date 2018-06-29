@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthenticationService } from 'src/app/service/authentication.service';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
@@ -18,8 +18,8 @@ export class LoginComponent implements OnInit {
               private authService: AuthenticationService,
               private snackBar: MatSnackBar) {
     this.loginForm = this.fb.group({
-      email: '',
-      password: ''
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
 
