@@ -26,6 +26,7 @@ export class NavigationComponent implements OnInit {
     this.authService.logout().then(res => {
       this.router.navigate(['']);
       this.snackBar.open('Logged out');
+      this.loggedIn = false;
     }, err => {
       this.snackBar.open('Problem logging out');
     });

@@ -15,13 +15,17 @@ import { AppComponent } from './app.component';
 import { NavigationComponent } from './component/navigation/navigation.component';
 import { HomeComponent } from './component/home/home.component';
 import { LoginComponent } from './component/login/login.component';
+import { SignupComponent } from './component/signup/signup.component';
 import { SpinnerComponent } from './ui/spinner/spinner.component';
 import { MAT_LABEL_GLOBAL_OPTIONS, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material';
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
+    SignupComponent,
     NavigationComponent,
     HomeComponent,
     SpinnerComponent

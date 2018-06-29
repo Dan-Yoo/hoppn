@@ -16,14 +16,15 @@ export class LoginComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private router: Router,
               private authService: AuthenticationService,
-              private snackBar: MatSnackBar) 
-  {}
-
-  ngOnInit() {
+              private snackBar: MatSnackBar) {
     this.loginForm = this.fb.group({
       email: '',
       password: ''
     });
+  }
+
+  ngOnInit() {
+    
   }
 
   onSubmit() {
