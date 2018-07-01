@@ -19,6 +19,7 @@ import { LoginComponent } from './component/login/login.component';
 import { SignupComponent } from './component/signup/signup.component';
 import { SpinnerComponent } from './ui/spinner/spinner.component';
 import { MAT_LABEL_GLOBAL_OPTIONS, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material';
+import { DashboardComponent } from './component/dashboard/dashboard.component';
 
 
 
@@ -29,7 +30,8 @@ import { MAT_LABEL_GLOBAL_OPTIONS, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angula
     SignupComponent,
     NavigationComponent,
     HomeComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
