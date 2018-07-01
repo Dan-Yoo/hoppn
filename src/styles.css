@@ -56,3 +56,4 @@ html, body {
     ANGULAR MATERIAL OVERRIDES
 */
 /* .mat-form-field { width: 100% } */
+.mat-chip { font-size: 0.7rem }

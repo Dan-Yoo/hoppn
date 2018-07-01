@@ -26,7 +26,7 @@
 
   <div fxFlex="grow" fxLayout="row" fxLayoutGap="2rem" fxLayoutAlign="start stretch">
     <!-- list of place cards -->
-    <div style="overflow: scroll" fxFlex="400px" fxLayout="column" fxLayoutGap="1rem">
+    <div style="overflow: scroll" fxFlex="300px" fxLayout="column" fxLayoutGap="1rem">
       <mat-card *ngFor="let place of places | async" style="width: 100%; margin: 1rem;">
         <mat-card-header>
           <div mat-card-avatar style="width: 25%">
@@ -35,7 +35,9 @@
           <mat-card-title>{{place.getName()}}</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          {{place.getTypes()}}
+            <mat-chip-list>
+                <mat-chip color="accent" selected *ngFor="let type of place.getTypes()">{{type}}</mat-chip>
+              </mat-chip-list>
         </mat-card-content>
         <mat-card-actions>
           <button mat-button>SAVE</button>
@@ -46,8 +48,11 @@
     <!-- map -->
     <div fxFlex="grow">
       <agm-map [zoom]="15" [latitude]="lat" [longitude]="long">
-        <agm-marker [iconUrl]="" [latitude]="lat" [longitude]="long"></agm-marker>
-        <agm-marker *ngFor="let place of places | async" [latitude]="place.getLat()" [longitude]="place.getLong()"></agm-marker>
+        <agm-marker [latitude]="lat" [longitude]="long"></agm-marker>
+        <agm-marker *ngFor="let place of places | async"
+          [latitude]="place.getLat()" 
+          [longitude]="place.getLong()">
+        </agm-marker>
       </agm-map>
     </div>
 
