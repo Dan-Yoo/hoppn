@@ -26,7 +26,7 @@ export class SignupComponent implements OnInit {
   ngOnInit() {
   }
 
-  private onSignup(): void {
+  onSignup(): void {
     this.authService.register(this.signupForm.value.email, this.signupForm.value.password)
       .then(res => {
         this.router.navigate(['']);
