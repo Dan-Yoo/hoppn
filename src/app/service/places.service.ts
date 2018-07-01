@@ -26,7 +26,7 @@ export class PlacesService {
           let place = new Place(results[key]);
           places.push(place);
         }
-        
+         
         return places;
       }));
   }
