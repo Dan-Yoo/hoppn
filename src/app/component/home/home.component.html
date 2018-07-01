@@ -30,7 +30,7 @@
       <mat-card *ngFor="let place of places | async" style="width: 100%; margin: 1rem;">
         <mat-card-header>
           <div mat-card-avatar style="width: 25%">
-            <img style="max-height: 100%" src="{{ getPhoto(place.getPhotoRef()) }}">
+            <img style="max-height: 100%" src="{{ place.getImage() }}">
           </div>
           <mat-card-title>{{place.getName()}}</mat-card-title>
         </mat-card-header>

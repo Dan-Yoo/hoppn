@@ -17,18 +17,18 @@ export class PlacesService {
       .pipe(map(place => new PlaceDetail(place)));
   }
 
-  getPlacesNearby(data): Observable<Place[]> {
-    return this.http.get<Place[]>('http://localhost:3000/google/places/nearby', { params: data })
-      .pipe(map((results: Place[]) => {
-        let places: Place[] = [];
+  getPlacesNearby(data): Observable<any> {
+    return this.http.get<Place[]>('http://localhost:3000/google/places/nearby', { params: data });
+      // .pipe(map((results: Place[]) => {
+      //   let places: Place[] = [];
 
-        for (const key in results) {
-          let place = new Place(results[key]);
-          places.push(place);
-        }
+      //   for (const key in results) {
+      //     let place = new Place(results[key]);
+      //     places.push(place);
+      //   }
          
-        return places;
-      }));
+      //   return places;
+      // }));
   }
 
   getPlacePhoto(data): Observable<string> {
