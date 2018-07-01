@@ -1,28 +1,6 @@
 <main class="full-screen-container" fxLayoutGap="2rem" fxLayout="column">
-  <form [formGroup]="placeSearchForm" 
-        fxLayout="row wrap"
-        fxLayoutGap="5px"
-        fxLayoutAlign="start center">
-    <mat-form-field appearance="outline">
-      <mat-label>Longitude</mat-label>
-      <input matInput type="number" formControlName="long">
-    </mat-form-field>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Latitude</mat-label>
-      <input matInput type="number" formControlName="lat">
-    </mat-form-field>
-
-    <mat-form-field appearance="outline">
-      <mat-label>Radius (meters)</mat-label>
-      <input matInput type="number" formControlName="radius">
-    </mat-form-field>
-
-    <button fxFlex="nogrow" mat-raised-button color="primary" (click)="findPlaces()">Search</button>
-    <button mat-raised-button color="primary" (click)="useCurrentLocation()">Use Current Location</button>
-    
-    <mat-divider></mat-divider>
-  </form>
+  <app-map-filter [long]="long" [lat]="lat" [radius]="radius" (locationChange)="updateLocation($event)"></app-map-filter>
 
   <div fxFlex="grow" fxLayout="row" fxLayoutGap="2rem" fxLayoutAlign="start stretch">
     <!-- list of place cards -->
