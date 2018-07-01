@@ -21,8 +21,6 @@ import { SpinnerComponent } from './ui/spinner/spinner.component';
 import { MAT_LABEL_GLOBAL_OPTIONS, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
 
-
-
 @NgModule({
   declarations: [
     AppComponent,

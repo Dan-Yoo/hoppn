@@ -38,14 +38,6 @@ html, body {
     padding-bottom: 2rem;
 }
 
-.card {
-    position: relative;
-    background-color: white;
-    border: 1px solid grey;
-    border-radius: 5px;
-    padding: 1rem;
-}
-
 /* 
     UTILITIES
 */
@@ -57,3 +49,14 @@ html, body {
 */
 /* .mat-form-field { width: 100% } */
 .mat-chip { font-size: 0.7rem }
+.mat-card-header {
+    background-size: cover;
+    background-position: center;
+    height: 200px;
+    width: 100%;
+}
+
+.mat-card { padding: 10px !important }
+.mat-card-title { margin: 10px 0 !important }
+.mat-card-actions { margin-bottom: 0 !important }
+.mat-card-content { margin-bottom: 0 !important }
