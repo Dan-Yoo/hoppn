@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { Place } from 'src/app/model/place';
 import { PlaceDetail } from 'src/app/model/placedetail';
 
@@ -18,17 +18,17 @@ export class PlacesService {
   }
 
   getPlacesNearby(data): Observable<any> {
-    return this.http.get<Place[]>('http://localhost:3000/google/places/nearby', { params: data });
-      // .pipe(map((results: Place[]) => {
-      //   let places: Place[] = [];
+    return this.http.get<Place[]>('http://localhost:3000/google/places/nearby', { params: data })
+      .pipe(map((results: Place[]) => {
+        let places: Place[] = [];
 
-      //   for (const key in results) {
-      //     let place = new Place(results[key]);
-      //     places.push(place);
-      //   }
+        for (const key in results) {
+          let place = new Place(results[key]);
+          places.push(place);
+        }
          
-      //   return places;
-      // }));
+        return places;
+      }));
   }
 
   getPlacePhoto(data): Observable<string> {

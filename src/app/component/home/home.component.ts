@@ -3,6 +3,7 @@ import { Place } from 'src/app/model/place';
 import { Observable } from 'rxjs';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { PlacesService } from 'src/app/service/places.service';
+import { share } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -10,11 +11,7 @@ import { PlacesService } from 'src/app/service/places.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
-
-  places: Observable<any>;
-  test: Place;
-
+  places: Observable<Place>;
   placeSearchForm: FormGroup;
   long: number = -73.56;
   lat: number = 45.5016896;
@@ -35,9 +32,7 @@ export class HomeComponent implements OnInit {
     this.places = this.placesService.getPlacesNearby({
       location: JSON.stringify([value.lat, value.long]),
       radius: value.radius
-    });
-
-    this.places.subscribe(places => console.log("places %o", places));
+    }).pipe(share());
   }
 
   useCurrentLocation() {
@@ -49,13 +44,6 @@ export class HomeComponent implements OnInit {
 
       this.long = position.coords.longitude;
       this.lat = position.coords.latitude;
-    });
-  }
-
-  getPhoto(photoref: string) {
-    this.placesService.getPlacePhoto({
-      photoreference: photoref,
-      maxwidth: 400
     });
   }
 
