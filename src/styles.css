@@ -25,11 +25,32 @@ html, body {
 /*lg*/
 @media (min-width: 1919px) { .fx-container {padding: 0 6rem;} }
 
-main { margin: 2rem 0 }
-
 .center { margin: 0 auto }
 
+.compensate-nav { padding-top: 64px }
+.full-screen-container {
+    margin-top: -64px; 
+    width: 100vw; 
+    height: 100vh;
+    padding-top: 6rem; 
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-bottom: 2rem;
+}
 
+.card {
+    position: relative;
+    background-color: white;
+    border: 1px solid grey;
+    border-radius: 5px;
+    padding: 1rem;
+}
+
+/* 
+    UTILITIES
+*/
+
+.mt-2 { margin-top: 2rem }
 
 /*
     ANGULAR MATERIAL OVERRIDES

@@ -34,4 +34,7 @@ export class Place {
             return this.photos[i].photo_reference;
         }
     }
+
+    getLong(): number { return this.geometry.location.lng }
+    getLat(): number { return this.geometry.location.lat }
 }

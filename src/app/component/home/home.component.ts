@@ -11,6 +11,7 @@ import { PlacesService } from 'src/app/service/places.service';
 })
 export class HomeComponent implements OnInit {
 
+
   places: Observable<any>;
   test: Place;
 
@@ -35,6 +36,8 @@ export class HomeComponent implements OnInit {
       location: JSON.stringify([value.lat, value.long]),
       radius: value.radius
     });
+
+    this.places.subscribe(places => console.log("places %o", places));
   }
 
   useCurrentLocation() {
@@ -43,6 +46,9 @@ export class HomeComponent implements OnInit {
         long: position.coords.longitude,
         lat: position.coords.latitude
       })
+
+      this.long = position.coords.longitude;
+      this.lat = position.coords.latitude;
     });
   }
 
