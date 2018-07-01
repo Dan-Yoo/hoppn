@@ -1,18 +1,18 @@
 <section class="container mt-2" fxLayout="row">
   <mat-card fxFlex="400px"  class="center">
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="signupForm" (ngSubmit)="onSignup()">
       <mat-form-field appearance="outline">
         <mat-label>Email</mat-label>
         <input matInput formControlName="email">
-        <mat-error *ngIf="loginForm.controls.email.invalid">A valid email is required.</mat-error>
+        <mat-error *ngIf="signupForm.controls.email.invalid">A valid email is required.</mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Password</mat-label>
         <input type="password" matInput formControlName="password">
-        <mat-error *ngIf="loginForm.controls.password.invalid">Password is #@%$@?.</mat-error>
+        <mat-error *ngIf="signupForm.controls.password.invalid">Password must be minimum 6 characters.</mat-error>
       </mat-form-field>
       <br>
-      <button type="submit" [disabled]="loginForm.invalid" color="accent" mat-raised-button>Login</button>
+      <button type="submit" [disabled]="signupForm.invalid" color="accent" mat-raised-button>Sign Up</button>
     </form>
   </mat-card>
 </section>

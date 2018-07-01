@@ -1,34 +1,33 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AuthenticationService } from 'src/app/service/authentication.service';
+import { AuthenticationService } from '../../service/authentication.service';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-signup',
+  templateUrl: './signup.component.html',
+  styleUrls: ['./signup.component.css']
 })
-export class LoginComponent implements OnInit {
+export class SignupComponent implements OnInit {
 
-  loginForm: FormGroup;
+  signupForm: FormGroup;
 
   constructor(private fb: FormBuilder,
-              private router: Router,
               private authService: AuthenticationService,
-              private snackBar: MatSnackBar) {
-    this.loginForm = this.fb.group({
+              private router: Router,
+              private snackBar: MatSnackBar) { 
+    this.signupForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
 
   ngOnInit() {
-    
   }
 
-  onSubmit() {
-    this.authService.login(this.loginForm.value.email, this.loginForm.value.password)
+  private onSignup(): void {
+    this.authService.register(this.signupForm.value.email, this.signupForm.value.password)
       .then(res => {
         this.router.navigate(['']);
         this.snackBar.open('Successfully logged in');
@@ -36,5 +35,4 @@ export class LoginComponent implements OnInit {
         this.snackBar.open('A problem occured while trying to log in (specify the problem here later)');
       });
   }
-
 }

@@ -25,13 +25,38 @@ html, body {
 /*lg*/
 @media (min-width: 1919px) { .fx-container {padding: 0 6rem;} }
 
-main { margin: 2rem 0 }
-
 .center { margin: 0 auto }
 
+.compensate-nav { padding-top: 64px }
+.full-screen-container {
+    margin-top: -64px; 
+    width: 100vw; 
+    height: 100vh;
+    padding-top: 6rem; 
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-bottom: 2rem;
+}
 
+/* 
+    UTILITIES
+*/
+
+.mt-2 { margin-top: 2rem }
 
 /*
     ANGULAR MATERIAL OVERRIDES
 */
 /* .mat-form-field { width: 100% } */
+.mat-chip { font-size: 0.7rem }
+.mat-card-header {
+    background-size: cover;
+    background-position: center;
+    height: 200px;
+    width: 100%;
+}
+
+.mat-card { padding: 10px !important }
+.mat-card-title { margin: 10px 0 !important }
+.mat-card-actions { margin-bottom: 0 !important }
+.mat-card-content { margin-bottom: 0 !important }

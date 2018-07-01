@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { Place } from 'src/app/model/place';
 import { PlaceDetail } from 'src/app/model/placedetail';
 
@@ -17,7 +17,7 @@ export class PlacesService {
       .pipe(map(place => new PlaceDetail(place)));
   }
 
-  getPlacesNearby(data): Observable<Place[]> {
+  getPlacesNearby(data): Observable<any> {
     return this.http.get<Place[]>('http://localhost:3000/google/places/nearby', { params: data })
       .pipe(map((results: Place[]) => {
         let places: Place[] = [];
@@ -26,7 +26,7 @@ export class PlacesService {
           let place = new Place(results[key]);
           places.push(place);
         }
-        
+         
         return places;
       }));
   }
