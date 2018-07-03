@@ -69,5 +69,5 @@ html, body {
 
 .mat-card { padding: 10px !important }
 .mat-card-title { margin: 10px 0 !important }
-.mat-card-actions { margin-bottom: 0 !important }
-.mat-card-content { margin-bottom: 0 !important }
+.mat-card-actions { margin-bottom: 0 !important; margin: 0 !important }
+.mat-card-content { margin-bottom: 0 !important; overflow: hidden }
