@@ -38,12 +38,23 @@ html, body {
     padding-bottom: 2rem;
 }
 
+@media (max-width: 599px) {
+    .full-screen-container {
+        margin-top: -64px;
+        padding-top: 5rem; 
+        padding-left: 1rem;
+        padding-right: 1rem;
+        padding-bottom: 1rem;
+    }
+}
+
 /* 
     UTILITIES
 */
 
 .mt-2 { margin-top: 2rem }
-
+.w-100 {width: 100%}
+.center {text-align: center}
 /*
     ANGULAR MATERIAL OVERRIDES
 */

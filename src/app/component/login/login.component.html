@@ -1,12 +1,12 @@
 <section class="container mt-2" fxLayout="row">
   <mat-card fxFlex="400px"  class="center">
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <mat-form-field appearance="outline">
+      <mat-form-field class="w-100" appearance="outline">
         <mat-label>Email</mat-label>
         <input matInput formControlName="email">
         <mat-error *ngIf="loginForm.controls.email.invalid">A valid email is required.</mat-error>
       </mat-form-field>
-      <mat-form-field appearance="outline">
+      <mat-form-field class="w-100" appearance="outline">
         <mat-label>Password</mat-label>
         <input type="password" matInput formControlName="password">
         <mat-error *ngIf="loginForm.controls.password.invalid">Password is #@%$@?.</mat-error>
