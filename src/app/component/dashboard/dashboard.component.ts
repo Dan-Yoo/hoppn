@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UserPlacesService, UserPlace } from '../../service/user-places.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  places: Observable<UserPlace[]>;
+
+  constructor(private userPlaceService: UserPlacesService) {
+    this.places = this.userPlaceService.getPlaces();  
+  }
 
   ngOnInit() {
+  }
+
+  addPlace() {
+    this.userPlaceService.addPlace('placeId1');
   }
 
 }

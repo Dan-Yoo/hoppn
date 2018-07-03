@@ -1,3 +1,8 @@
 <p>
   dashboard works!
 </p>
+<button mat-raised-button (click)="addPlace()">Add Place</button>
+
+<div *ngFor="let place of places | async">
+  PLACE!
+</div>
