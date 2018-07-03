@@ -53,7 +53,8 @@ html, body {
 */
 
 .mt-2 { margin-top: 2rem }
-
+.w-100 {width: 100%}
+.center {text-align: center}
 /*
     ANGULAR MATERIAL OVERRIDES
 */
