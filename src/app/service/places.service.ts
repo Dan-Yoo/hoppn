@@ -13,12 +13,12 @@ export class PlacesService {
   constructor(private http: HttpClient) { }
 
   getPlaceDetail(data): Observable<PlaceDetail> {
-    return this.http.get<PlaceDetail>('http://localhost:3000/google/place/detail', { params: data })
+    return this.http.get<PlaceDetail>('/google/place/detail', { params: data })
       .pipe(map(place => new PlaceDetail(place)));
   }
 
   getPlacesNearby(data): Observable<any> {
-    return this.http.get<Place[]>('http://localhost:3000/google/places/nearby', { params: data })
+    return this.http.get<Place[]>('/google/places/nearby', { params: data })
       .pipe(map((results: Place[]) => {
         let places: Place[] = [];
 
@@ -32,7 +32,7 @@ export class PlacesService {
   }
 
   getPlacePhoto(data): Observable<string> {
-    return this.http.get('http://localhost:3000/google/place/photo', {params: data})
+    return this.http.get('/google/place/photo', {params: data})
       .pipe(map((result: any) => {
         return 'https://lh4.googleusercontent.com/' + result.photo_url;
         // return result + "";

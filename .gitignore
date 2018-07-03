@@ -39,7 +39,4 @@ testem.log
 Thumbs.db
 
 # Environment files
-# /src/environments
-
-# Dist folder
-# /dist
+/src/environments
