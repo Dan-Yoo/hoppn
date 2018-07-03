@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { PlacesService } from 'src/app/service/places.service';
 import { share } from 'rxjs/operators';
+import { HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -16,9 +17,17 @@ export class HomeComponent implements OnInit {
   long: number = -73.56;
   lat: number = 45.5016896;
   radius: number = 500;
+  mobileView=false;
+  displayView='Map';
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.mobileView = window.innerWidth < 600;
+  }
 
   constructor(private placesService: PlacesService,
     private fb: FormBuilder) {
+    this.mobileView = window.innerWidth < 600;
     this.placeSearchForm = this.fb.group({
       long: [this.long, null],
       lat: [this.lat, null],
@@ -48,4 +57,8 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {}
+
+  toggleView() {
+    this.displayView = (this.displayView == 'Map') ? 'List' : 'Map'; 
+  }
 }

@@ -1,5 +1,5 @@
 <main class="full-screen-container" fxLayoutGap="2rem" fxLayout="column">
-  <form [formGroup]="placeSearchForm" 
+  <form *ngIf="!mobileView" [formGroup]="placeSearchForm" 
         fxLayout="row wrap"
         fxLayoutGap="5px"
         fxLayoutAlign="start center">
@@ -26,7 +26,7 @@
 
   <div fxFlex="grow" fxLayout="row" fxLayoutGap="2rem" fxLayoutAlign="start stretch">
     <!-- list of place cards -->
-    <div style="overflow: scroll" fxFlex="300px" fxLayout="column" fxLayoutGap="1rem">
+    <div *ngIf="(displayView != 'List' && mobileView) || !mobileView" style="overflow: scroll" fxFlex="300px" fxFlexlt-sm="100" fxLayout="column" fxLayoutGap="1rem">
       <mat-card *ngFor="let place of places | async" style="width: 100%; margin: 1rem;">
         <mat-card-header [ngStyle]="{ 'background-image': 'url(' + place.image + ')'}">
         </mat-card-header>
@@ -43,7 +43,7 @@
     </div>
 
     <!-- map -->
-    <div fxFlex="grow">
+    <div *ngIf="(displayView != 'Map' && mobileView) || !mobileView" fxFlex="grow" fxFlex.lt-sm="100">
       <agm-map [zoom]="15" [latitude]="lat" [longitude]="long">
         <agm-marker [latitude]="lat" [longitude]="long"></agm-marker>
         <agm-marker *ngFor="let place of places | async"
@@ -52,6 +52,9 @@
         </agm-marker>
       </agm-map>
     </div>
+  </div>
 
+  <div *ngIf="mobileView" style="position: absolute; padding: 1rem; bottom: 0; left: 0; width: 100%; text-align: center">
+    <button mat-raised-button color="accent" (click)="toggleView()">{{displayView}}</button>
   </div>
 </main>
