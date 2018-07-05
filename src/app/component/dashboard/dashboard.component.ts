@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserPlacesService, UserPlace } from '../../service/user-places.service';
 import { Observable } from 'rxjs';
+import { PlaceDetail } from '../../model/placedetail';
+import { PlacesService } from '../../service/places.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,17 +11,20 @@ import { Observable } from 'rxjs';
 })
 export class DashboardComponent implements OnInit {
 
-  places: Observable<UserPlace[]>;
+  places$: Observable<UserPlace[]>;
+  placeDetail$: Observable<PlaceDetail>;
 
-  constructor(private userPlaceService: UserPlacesService) {
-    this.places = this.userPlaceService.getPlaces();  
+  constructor(private placeService: PlacesService,
+              private userPlaceService: UserPlacesService) {
+    this.places$ = this.userPlaceService.getPlaces();  
   }
 
-  ngOnInit() {
+ngOnInit() {
   }
 
-  addPlace() {
-    this.userPlaceService.addPlace('placeId1');
-  }
+  seeDetails(placeId: string): void {
+    this.placeDetail$ = this.placeService.getPlaceDetail({placeid: placeId});
 
+    this.placeDetail$.subscribe(res => console.log("place detail %o", res));
+  }
 }

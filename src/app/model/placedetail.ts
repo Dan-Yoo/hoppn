@@ -1,14 +1,10 @@
 import { Place } from './place';
 
-export class PlaceDetail extends Place {
-    private addressComponents: any;
-    private formattedAddress: string;
-    private url: string;
-
-    constructor(data) {
-        super(data);
-        this.addressComponents = data.address_components;
-        this.formattedAddress = data.formatted_address;
-        this.url = data.url;
-    }
+export interface PlaceDetail extends Place {
+    address_components: any;
+    adr_address: string;
+    formatted_address: string;
+    formatted_phone_number: string;
+    reviews: object[];
+    url: string;
 }

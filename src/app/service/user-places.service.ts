@@ -15,6 +15,7 @@ export class UserPlacesService {
   constructor(private db: AngularFirestore,
               private auth: AuthenticationService) {
     this.auth.user$.subscribe(user => {
+      if (!user) return;
       this.userId = user.uid;
     });
   }
@@ -24,10 +25,10 @@ export class UserPlacesService {
     return doc.valueChanges() as Observable<UserPlace[]>;
   }
 
-  addPlace(placeId: string) {
+  addPlace(placeId: string): Promise<any> {
     console.log("trying to add place with %o", placeId);
     console.log("and user id " + this.userId);
-    this.db.collection('users').doc(this.userId).collection('places').add({
+    return this.db.collection('users').doc(this.userId).collection('places').add({
       place_id: placeId,
       is_favorite: false
     });

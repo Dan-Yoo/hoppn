@@ -5,6 +5,8 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { PlacesService } from 'src/app/service/places.service';
 import { share } from 'rxjs/operators';
 import { HostListener } from '@angular/core';
+import { UserPlacesService } from '../../service/user-places.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +14,7 @@ import { HostListener } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  places: Observable<Place>;
+  places: Observable<Place[]>;
   placeSearchForm: FormGroup;
   long: number = -73.56;
   lat: number = 45.5016896;
@@ -26,7 +28,9 @@ export class HomeComponent implements OnInit {
   }
 
   constructor(private placesService: PlacesService,
-    private fb: FormBuilder) {
+              private userPlaceService: UserPlacesService,
+              private snackBar: MatSnackBar,
+              private fb: FormBuilder) {
     this.mobileView = window.innerWidth < 600;
     this.placeSearchForm = this.fb.group({
       long: [this.long, null],
@@ -60,5 +64,13 @@ export class HomeComponent implements OnInit {
 
   toggleView() {
     this.displayView = (this.displayView == 'Map') ? 'List' : 'Map'; 
+  }
+
+  // test id: ChIJDbdkHFQayUwR7-8fITgxTmU
+  savePlace(placeId: string) {
+    this.userPlaceService.addPlace(placeId).then(
+      res => {this.snackBar.open('Added this place to My Places')},
+      err => {alert('There was a problem trying to save this place')}
+    );
   }
 }

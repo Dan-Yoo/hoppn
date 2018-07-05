@@ -37,7 +37,7 @@
           </mat-chip-list>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-button>SAVE</button>
+          <button mat-button (click)="savePlace(place.place_id)">SAVE</button>
         </mat-card-actions>
       </mat-card>
     </div>
@@ -47,8 +47,8 @@
       <agm-map [zoom]="15" [latitude]="lat" [longitude]="long">
         <agm-marker [latitude]="lat" [longitude]="long"></agm-marker>
         <agm-marker *ngFor="let place of places | async"
-          [latitude]="place.getLat()" 
-          [longitude]="place.getLong()">
+          [latitude]="place.lat" 
+          [longitude]="place.long">
         </agm-marker>
       </agm-map>
     </div>

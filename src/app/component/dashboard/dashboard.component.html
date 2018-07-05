@@ -1,8 +1,25 @@
-<p>
-  dashboard works!
-</p>
-<button mat-raised-button (click)="addPlace()">Add Place</button>
-
-<div *ngFor="let place of places | async">
-  PLACE!
-</div>
+<main class="full-screen-container" fxLayout="row">
+  <section fxFlex="300px">
+    <div *ngFor="let place of places$ | async" (click)="seeDetails(place.place_id)">
+        {{place.place_id}}
+    </div>
+  </section>
+  
+  <section>
+    <ng-container *ngIf="placeDetail$ | async as placeDetail">
+      <div>PUT CAROUSEL OF PHOTOS HERE MAYBE</div>
+      <div>Formatted address : {{placeDetail.formatted_address}}</div>
+      <div>name : {{placeDetail.name}}</div>
+      <div>rating : {{placeDetail.rating}}</div>
+      <div>Formatted phone number : {{placeDetail.formatted_phone_number}}</div>
+      <br>
+      <h2>Reviews</h2>
+      <div *ngFor="let review of placeDetail.reviews">
+        {{review.text}}<br>
+        {{review.relative_time_description}}<br>
+        {{review.rating}}<br>
+      </div>
+      <div>website : {{placeDetail.website}}</div>
+    </ng-container>
+  </section>
+</main>
