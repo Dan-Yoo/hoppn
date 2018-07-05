@@ -8,8 +8,8 @@
   <section>
     <ng-container *ngIf="placeDetail$ | async as placeDetail">
       <div>PUT CAROUSEL OF PHOTOS HERE MAYBE</div>
+      <h1>name : {{placeDetail.name}}</h1>
       <div>Formatted address : {{placeDetail.formatted_address}}</div>
-      <div>name : {{placeDetail.name}}</div>
       <div>rating : {{placeDetail.rating}}</div>
       <div>Formatted phone number : {{placeDetail.formatted_phone_number}}</div>
       <br>
