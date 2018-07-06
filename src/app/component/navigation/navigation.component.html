@@ -1,6 +1,6 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <a routerLink="/" mat-button>Hoppn</a>
+    <a routerLink="/" mat-button><mat-icon>flight_takeoff</mat-icon></a>
     <a *ngIf="!loggedIn" routerLink="/login" mat-button>Login</a>
     <a *ngIf="loggedIn" routerLink="/dashboard" mat-button>Dashboard</a>
     <a *ngIf="loggedIn" (click)="logout()" mat-button>Logout</a>

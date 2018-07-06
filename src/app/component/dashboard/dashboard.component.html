@@ -1,3 +1,32 @@
-<p>
-  dashboard works!
-</p>
+<main class="full-screen-container" fxLayout="row" fxLayoutAlign="stretch">
+  <section fxFlex="300px">
+    <div *ngFor="let place of places$ | async" (click)="seeDetails(place.place_id)">
+        {{place.place_id}}
+    </div>
+  </section>
+  
+  <section fxFlex="grow">
+    <mat-card class="w-100 h-100">
+      <div class="carousel-container" fxLayout="row">
+        <div style="width: 200px; height: 200px; background-color: steelblue;">
+          Images here
+        </div>
+      </div>
+      <h1>{{(placeDetail$ | async)?.name}}</h1>
+      <div>Formatted address : {{(placeDetail$ | async)?.formatted_address}}</div>
+      <div>rating : {{(placeDetail$ | async)?.rating}}</div>
+      <div>Formatted phone number : {{(placeDetail$ | async)?.formatted_phone_number}}</div>
+      <br>
+      <h2>Reviews</h2>
+      <div *ngFor="let review of (placeDetail$ | async)?.reviews">
+        {{review.text}}<br>
+        {{review.relative_time_description}}<br>
+        {{review.rating}}<br>
+      </div>
+      <div>website : {{(placeDetail$ | async)?.website}}</div>
+      <agm-map [zoom]="17" [latitude]="(placeDetail$ | async)?.geometry.location.lat" [longitude]="(placeDetail$ | async)?.geometry.location.lng">
+        <agm-marker [latitude]="(placeDetail$ | async)?.geometry.location.lat" [longitude]="(placeDetail$ | async)?.geometry.location.lng"></agm-marker>
+      </agm-map>
+    </mat-card>
+  </section>
+</main>

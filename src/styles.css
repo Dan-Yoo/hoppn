@@ -16,6 +16,7 @@ html, body {
   padding: 0 1rem;
   width: 100%;
 }
+
 /*xs*/
 @media (min-width: 599px) { .fx-container {padding: 0 2rem} }
 /*sm*/
@@ -28,6 +29,8 @@ html, body {
 .center { margin: 0 auto }
 
 .compensate-nav { padding-top: 64px }
+
+/* at 599, navbar height changes from 64px to 56px */
 .full-screen-container {
     margin-top: -64px; 
     width: 100vw; 
@@ -40,12 +43,16 @@ html, body {
 
 @media (max-width: 599px) {
     .full-screen-container {
-        margin-top: -64px;
+        margin-top: -56px;
         padding-top: 5rem; 
         padding-left: 1rem;
         padding-right: 1rem;
         padding-bottom: 1rem;
     }
+}
+
+::-webkit-scrollbar { 
+    display: none; 
 }
 
 /* 
@@ -54,7 +61,11 @@ html, body {
 
 .mt-2 { margin-top: 2rem }
 .w-100 {width: 100%}
+.h-100 {height: 100%}
+.no-padding {padding: 0}
+.compensate-nav {padding-top: 56px !important}
 .center {text-align: center}
+
 /*
     ANGULAR MATERIAL OVERRIDES
 */
@@ -67,7 +78,10 @@ html, body {
     width: 100%;
 }
 
+.mat-tab-body-wrapper { height: 100% !important; }  
+.mat-tab-body-content { overflow-y: scroll !important; padding: 1rem }
+.mat-tab-content { height: 100% }
 .mat-card { padding: 10px !important }
 .mat-card-title { margin: 10px 0 !important }
-.mat-card-actions { margin-bottom: 0 !important }
-.mat-card-content { margin-bottom: 0 !important }
+.mat-card-actions { margin-bottom: 0 !important; margin: 0 !important }
+.mat-card-content { margin-bottom: 0 !important; overflow: hidden }
