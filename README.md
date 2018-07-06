@@ -28,5 +28,5 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## Deploying
 Build angular app with ng build --prod
-Move the dist folder created to the nodejs app
-Deploy to remote
+Move the dist folder created to the nodejs app.
+Commit everything and push to heroku with git push heroku master.
