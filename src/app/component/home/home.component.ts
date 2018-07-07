@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Place } from 'src/app/model/place';
 import { Observable } from 'rxjs';
 import { FormGroup, FormBuilder } from '@angular/forms';
@@ -7,6 +7,8 @@ import { share } from 'rxjs/operators';
 import { HostListener } from '@angular/core';
 import { UserPlacesService } from '../../service/user-places.service';
 import { MatSnackBar } from '@angular/material';
+import { InfoWindow } from '@agm/core/services/google-maps-types';
+import { MapFilterComponent } from '../map-filter/map-filter.component';
 
 
 @Component({
@@ -15,10 +17,14 @@ import { MatSnackBar } from '@angular/material';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  @ViewChild('mapFilter') mapFilter: MapFilterComponent;
   long: number = -73.56;
   lat: number = 45.5016896;
   radius: number = 500;
   places: Observable<Place[]>;
+  infoWindow: InfoWindow;
+
+  centerIconUrl = 'https://cdn1.iconfinder.com/data/icons/menu-3-3/32/gps_pin_location_map-32.png';
 
   constructor(private userPlaceService: UserPlacesService,
               private placesService: PlacesService,
@@ -26,9 +32,12 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {}
 
-  updateLocation(location) {
-    this.long = location.long;
-    this.lat = location.lat;
+  useCurrentLocation() {
+    navigator.geolocation.getCurrentPosition((position) => {
+      this.long = position.coords.longitude;
+      this.lat = position.coords.latitude;
+      this.mapFilter.patchLocation(this.long, this.lat);
+    });
   }
 
   savePlace(placeId: string): void {
@@ -38,7 +47,8 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  getPlaces(value: any) {
+  getPlaces() {
+    let value = this.mapFilter.placeSearchForm.value;
     this.places = this.placesService.getPlacesNearby({
       location: JSON.stringify([value.lat, value.long]),
       radius: value.radius
@@ -48,5 +58,19 @@ export class HomeComponent implements OnInit {
       res => { this.snackBar.open('Completed Search') },
       err => { this.snackBar.open('There was a problem while trying to search') }
     )
+  }
+
+  setCenterMarker(event) {
+    this.lat = event.coords.lat;
+    this.long = event.coords.lng;
+
+    this.mapFilter.patchLocation(this.long, this.lat);
+    this.getPlaces();
+    //show loading spinner then hide on search complete.
+  }
+
+  openMarkerWindow(infoWindow, place) {
+    if (this.infoWindow) this.infoWindow.close();
+    this.infoWindow = infoWindow;
   }
 }

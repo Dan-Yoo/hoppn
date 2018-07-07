@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { PlacesService } from '../../service/places.service';
 import { Observable } from 'rxjs';
+import { OnChanges } from '@angular/core';
 
 @Component({
   selector: 'app-map-filter',
@@ -13,8 +14,6 @@ export class MapFilterComponent implements OnInit {
   @Input() long: number;
   @Input() lat: number;
   @Input() radius: number;
-  @Output() locationChange = new EventEmitter<any>();
-  @Output() initiateSearch = new EventEmitter<any>();
 
   filters = [
     {value: 'airport', viewValue: 'Airport'},
@@ -38,41 +37,19 @@ export class MapFilterComponent implements OnInit {
       lat: [this.lat, null],
       radius: [this.radius, null],
       filter: [''],
-      isOpen: [false],
-      keyword: [''],
-      minPrice: [0],
-      maxPrice: [0]
+      isOpen: [false]
     });
   }
 
-  findPlaces() {
-    this.initiateSearch.emit(this.placeSearchForm.value);
+  radiusChange(event) {
+    this.placeSearchForm.patchValue({radius: event.value});
   }
 
-  useCurrentLocation() {
-    navigator.geolocation.getCurrentPosition((position) => {
-      this.placeSearchForm.patchValue({
-        long: position.coords.longitude,
-        lat: position.coords.latitude
-      })
-
-      this.long = position.coords.longitude;
-      this.lat = position.coords.latitude;
-      this.locationChange.emit({long: this.long, lat: this.lat});
+  patchLocation(long, lat) {
+    this.placeSearchForm.patchValue({
+      lat: lat,
+      long: long
     });
-
-  }
-
-  formatLabel(value: number | null) {
-    if (!value) {
-      return 0;
-    }
-
-    if (value >= 1000) {
-      return Math.round(value / 1000) + 'k';
-    }
-
-    return value;
   }
 
 }

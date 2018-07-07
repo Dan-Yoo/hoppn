@@ -4,12 +4,10 @@
      <!-- filter tab -->
     <mat-tab style="height: 100%">
       <ng-template mat-tab-label>
-        <mat-icon>search</mat-icon>
+        <mat-icon>settings</mat-icon>
       </ng-template>
       <div class="mat-tab-content">
-        <app-map-filter [long]="long" [lat]="lat" [radius]="radius" 
-          (locationChange)="updateLocation($event)"
-          (initiateSearch)="getPlaces($event)"></app-map-filter>
+        <app-map-filter #mapFilter [long]="long" [lat]="lat" [radius]="radius"></app-map-filter>
       </div>
     </mat-tab>
 
@@ -18,17 +16,33 @@
       <ng-template mat-tab-label>
         <mat-icon>place</mat-icon>
       </ng-template>
-      <div class="mat-tab-content">
-        <agm-map class="h-100" [zoom]="15" [latitude]="lat" [longitude]="long">
-          <agm-marker [latitude]="lat" [longitude]="long"></agm-marker>
-          <agm-marker *ngFor="let place of places | async"
-            [latitude]="place.lat" 
-            [longitude]="place.long">
-          </agm-marker>
-          <agm-marker *ngFor="let place of places | async"
-            [latitude]="place.geometry.location.lat" 
-            [longitude]="place.geometry.location.lng">
-          </agm-marker>
+      <div class="mat-tab-content" style="position: relative">
+        <button (click)="useCurrentLocation()" mat-fab color="primary" style="position: absolute; bottom: 1rem; right: 0; z-index: 100;">
+          <mat-icon>my_location</mat-icon>
+        </button>
+        <!-- find way to hide + - zoom buttons on map -->
+        <agm-map class="h-100" [clickableIcons]="false" [streetViewControl]="false" [zoom]="15" [latitude]="lat" [longitude]="long" (mapClick)="setCenterMarker($event)">
+          <agm-marker [latitude]="lat" [longitude]="long" [iconUrl]="centerIconUrl"></agm-marker>
+          
+          <ng-container *ngFor="let place of places | async">
+            <agm-marker [latitude]="place.geometry.location.lat" 
+                        [longitude]="place.geometry.location.lng"
+                        (markerClick)="openMarkerWindow(infoWindow, place)">
+              <agm-info-window #infoWindow 
+                                [latitude]="place.geometry.location.lat"
+                                [longitude]="place.geometry.location.lng"
+                                [maxWidth]="250">
+                    <mat-card>
+                      <mat-card-header style="height: 100px" [ngStyle]="{ 'background-image': 'url(' + place.image + ')'}">
+                      </mat-card-header>
+                      <mat-card-content>
+                        <mat-card-title>{{place.name}}</mat-card-title>
+                        <button mat-button (click)="savePlace(place.place_id)">SAVE</button>
+                      </mat-card-content>
+                    </mat-card>
+              </agm-info-window>
+            </agm-marker>
+          </ng-container>
         </agm-map>
       </div>
     </mat-tab>
