@@ -5,34 +5,34 @@ import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-signup',
-  templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css']
+    selector: 'app-signup',
+    templateUrl: './signup.component.html',
+    styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
 
-  signupForm: FormGroup;
+    signupForm: FormGroup;
 
-  constructor(private fb: FormBuilder,
-              private authService: AuthenticationService,
-              private router: Router,
-              private snackBar: MatSnackBar) { 
-    this.signupForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
-    });
-  }
+    constructor(private fb: FormBuilder,
+        private authService: AuthenticationService,
+        private router: Router,
+        private snackBar: MatSnackBar) {
+        this.signupForm = this.fb.group({
+            email: ['', [Validators.required, Validators.email]],
+            password: ['', [Validators.required, Validators.minLength(6)]]
+        });
+    }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 
-  onSignup(): void {
-    this.authService.register(this.signupForm.value.email, this.signupForm.value.password)
-      .then(res => {
-        this.router.navigate(['']);
-        this.snackBar.open('Successfully logged in');
-      }, err => {
-        this.snackBar.open('A problem occured while trying to log in (specify the problem here later)');
-      });
-  }
+    onSignup(): void {
+        this.authService.register(this.signupForm.value.email, this.signupForm.value.password)
+            .then(res => {
+                this.router.navigate(['']);
+                this.snackBar.open('Successfully logged in');
+            }, err => {
+                this.snackBar.open('A problem occured while trying to log in (specify the problem here later)');
+            });
+    }
 }

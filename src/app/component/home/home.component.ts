@@ -13,68 +13,68 @@ import { SpinnerService } from '../../service/spinner.service';
 
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+    selector: 'app-home',
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  @ViewChild('mapFilter') mapFilter: MapFilterComponent;
-  long: number = -73.56;
-  lat: number = 45.5016896;
-  radius: number = 500;
-  places: Observable<Place[]>;
-  infoWindow: InfoWindow;
+    @ViewChild('mapFilter') mapFilter: MapFilterComponent;
+    long: number = -73.56;
+    lat: number = 45.5016896;
+    radius: number = 500;
+    places: Observable<Place[]>;
+    infoWindow: InfoWindow;
 
-  centerIconUrl = 'https://cdn1.iconfinder.com/data/icons/menu-3-3/32/gps_pin_location_map-32.png';
+    centerIconUrl = 'https://cdn1.iconfinder.com/data/icons/menu-3-3/32/gps_pin_location_map-32.png';
 
-  constructor(private userPlaceService: UserPlacesService,
-              private placesService: PlacesService,
-              private spinnerService: SpinnerService,
-              private snackBar: MatSnackBar) { }
+    constructor(private userPlaceService: UserPlacesService,
+        private placesService: PlacesService,
+        private spinnerService: SpinnerService,
+        private snackBar: MatSnackBar) { }
 
-  ngOnInit() {}
+    ngOnInit() { }
 
-  useCurrentLocation() {
-    navigator.geolocation.getCurrentPosition((position) => {
-      this.long = position.coords.longitude;
-      this.lat = position.coords.latitude;
-      this.mapFilter.patchLocation(this.long, this.lat);
-    });
-  }
+    useCurrentLocation() {
+        navigator.geolocation.getCurrentPosition((position) => {
+            this.long = position.coords.longitude;
+            this.lat = position.coords.latitude;
+            this.mapFilter.patchLocation(this.long, this.lat);
+        });
+    }
 
-  savePlace(placeId: string): void {
-    this.userPlaceService.addPlace(placeId).then(
-      res => {this.snackBar.open('Added this place to My Places')},
-      err => {this.snackBar.open('There was a problem trying to save this place')}
-    );
-  }
+    savePlace(placeId: string): void {
+        this.userPlaceService.addPlace(placeId).then(
+            res => { this.snackBar.open('Added this place to My Places') },
+            err => { this.snackBar.open('There was a problem trying to save this place') }
+        );
+    }
 
-  getPlaces() {
-    this.spinnerService.startSpinner();
-    
-    let value = this.mapFilter.placeSearchForm.value;
-    this.places = this.placesService.getPlacesNearby({
-      location: JSON.stringify([value.lat, value.long]),
-      radius: value.radius
-    }).pipe(share());
+    getPlaces() {
+        this.spinnerService.startSpinner();
 
-    this.places.subscribe(
-      res => { this.snackBar.open('Completed Search') },
-      err => { this.snackBar.open('There was a problem while trying to search') },
-      () => { this.spinnerService.stopSpinner() }
-    )
-  }
+        let value = this.mapFilter.placeSearchForm.value;
+        this.places = this.placesService.getPlacesNearby({
+            location: JSON.stringify([value.lat, value.long]),
+            radius: value.radius
+        }).pipe(share());
 
-  setCenterMarker(event) {
-    this.lat = event.coords.lat;
-    this.long = event.coords.lng;
+        this.places.subscribe(
+            res => { this.snackBar.open('Completed Search') },
+            err => { this.snackBar.open('There was a problem while trying to search') },
+            () => { this.spinnerService.stopSpinner() }
+        )
+    }
 
-    this.mapFilter.patchLocation(this.long, this.lat);
-    this.getPlaces();
-  }
+    setCenterMarker(event) {
+        this.lat = event.coords.lat;
+        this.long = event.coords.lng;
 
-  openMarkerWindow(infoWindow, place) {
-    if (this.infoWindow) this.infoWindow.close();
-    this.infoWindow = infoWindow;
-  }
+        this.mapFilter.patchLocation(this.long, this.lat);
+        this.getPlaces();
+    }
+
+    openMarkerWindow(infoWindow, place) {
+        if (this.infoWindow) this.infoWindow.close();
+        this.infoWindow = infoWindow;
+    }
 }

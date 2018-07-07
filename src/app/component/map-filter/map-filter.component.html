@@ -1,19 +1,19 @@
 <form [formGroup]="placeSearchForm" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="start">
-  <h2>Search Settings</h2>
+    <h2>Search Settings</h2>
 
-  <div>
-    <h5>Search Radius: {{placeSearchForm.value.radius}} meters</h5>
-    <mat-slider (input)="radiusChange($event)" tickInterval="100" min="50" max="5000" formControlName="radius"></mat-slider>
+    <div>
+        <h5>Search Radius: {{placeSearchForm.value.radius}} meters</h5>
+        <mat-slider (input)="radiusChange($event)" tickInterval="100" min="50" max="5000" formControlName="radius"></mat-slider>
 
-  </div>
+    </div>
 
-  <mat-form-field>
-    <mat-select placeholder="Filter" formControlName="filter">
-      <mat-option *ngFor="let filter of filters" [value]="filter.value">
-        {{filter.viewValue}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-checkbox formControlName="isOpen">Open Now</mat-checkbox>
+    <mat-form-field>
+        <mat-select placeholder="Filter" formControlName="filter">
+            <mat-option *ngFor="let filter of filters" [value]="filter.value">
+                {{filter.viewValue}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-checkbox formControlName="isOpen">Open Now</mat-checkbox>
 
 </form>

@@ -2,19 +2,19 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class SpinnerService {
-  private showSpinner = new BehaviorSubject(false);
-  showSpinner$ = this.showSpinner.asObservable();
+    private showSpinner = new BehaviorSubject(false);
+    showSpinner$ = this.showSpinner.asObservable();
 
-  constructor() { }
+    constructor() { }
 
-  startSpinner() {
-    this.showSpinner.next(true);
-  }
+    startSpinner() {
+        this.showSpinner.next(true);
+    }
 
-  stopSpinner() {
-    this.showSpinner.next(false);
-  }
+    stopSpinner() {
+        this.showSpinner.next(false);
+    }
 }
