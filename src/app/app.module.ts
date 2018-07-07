@@ -21,6 +21,7 @@ import { SpinnerComponent } from './ui/spinner/spinner.component';
 import { MAT_LABEL_GLOBAL_OPTIONS, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { MapFilterComponent } from './component/map-filter/map-filter.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { MapFilterComponent } from './component/map-filter/map-filter.component'
     AngularFireAuthModule,
     AgmCoreModule.forRoot({
       apiKey: environment.google.apiKey
-    })
+    }),
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, 

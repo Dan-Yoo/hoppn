@@ -27,6 +27,11 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 
 ## Deploying
-Build angular app with ng build --prod
-Move the dist folder created to the nodejs app.
-Commit everything and push to heroku with git push heroku master.
+Build angular PWA by running "npm run pwa"  
+  
+Run "firebase init" to create firebase app  
+- What do you want to use as your public directory? dist/hoppn  
+- Configure as a single-page app (rewrite all urls to /index.html)? Yes  
+- Overwrite? No  
+  
+Run "firebase deploy" to deploy app
