@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { SpinnerService } from '../../service/spinner.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-spinner',
@@ -6,8 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./spinner.component.css']
 })
 export class SpinnerComponent implements OnInit {
+  showSpinner$: Observable<boolean>;
 
-  constructor() { }
+  constructor(private spinnerService: SpinnerService) { 
+    this.showSpinner$ = this.spinnerService.showSpinner$;
+  }
 
   ngOnInit() {
   }

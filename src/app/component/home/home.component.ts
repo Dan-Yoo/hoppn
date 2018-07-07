@@ -9,6 +9,7 @@ import { UserPlacesService } from '../../service/user-places.service';
 import { MatSnackBar } from '@angular/material';
 import { InfoWindow } from '@agm/core/services/google-maps-types';
 import { MapFilterComponent } from '../map-filter/map-filter.component';
+import { SpinnerService } from '../../service/spinner.service';
 
 
 @Component({
@@ -28,6 +29,7 @@ export class HomeComponent implements OnInit {
 
   constructor(private userPlaceService: UserPlacesService,
               private placesService: PlacesService,
+              private spinnerService: SpinnerService,
               private snackBar: MatSnackBar) { }
 
   ngOnInit() {}
@@ -48,6 +50,8 @@ export class HomeComponent implements OnInit {
   }
 
   getPlaces() {
+    this.spinnerService.startSpinner();
+    
     let value = this.mapFilter.placeSearchForm.value;
     this.places = this.placesService.getPlacesNearby({
       location: JSON.stringify([value.lat, value.long]),
@@ -56,7 +60,8 @@ export class HomeComponent implements OnInit {
 
     this.places.subscribe(
       res => { this.snackBar.open('Completed Search') },
-      err => { this.snackBar.open('There was a problem while trying to search') }
+      err => { this.snackBar.open('There was a problem while trying to search') },
+      () => { this.spinnerService.stopSpinner() }
     )
   }
 
@@ -66,7 +71,6 @@ export class HomeComponent implements OnInit {
 
     this.mapFilter.patchLocation(this.long, this.lat);
     this.getPlaces();
-    //show loading spinner then hide on search complete.
   }
 
   openMarkerWindow(infoWindow, place) {
