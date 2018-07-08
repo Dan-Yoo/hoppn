@@ -53,14 +53,19 @@ export class HomeComponent implements OnInit {
         this.spinnerService.startSpinner();
 
         let value = this.mapFilter.placeSearchForm.value;
+        console.log("form values %o", value);
         this.places = this.placesService.getPlacesNearby({
             location: JSON.stringify([value.lat, value.long]),
-            radius: value.radius
+            radius: value.radius,
+            type: value.type
         }).pipe(share());
 
         this.places.subscribe(
             res => { this.snackBar.open('Completed Search') },
-            err => { this.snackBar.open('There was a problem while trying to search') },
+            err => { 
+                this.spinnerService.stopSpinner();
+                this.snackBar.open('There was a problem while trying to search');
+            },
             () => { this.spinnerService.stopSpinner() }
         )
     }
@@ -70,7 +75,6 @@ export class HomeComponent implements OnInit {
         this.long = event.coords.lng;
 
         this.mapFilter.patchLocation(this.long, this.lat);
-        this.getPlaces();
     }
 
     openMarkerWindow(infoWindow, place) {

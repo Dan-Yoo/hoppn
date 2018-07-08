@@ -14,3 +14,9 @@ mat-tab-group {
 ::-webkit-scrollbar { 
   display: none; 
 }
+
+.map-overlay-button {
+    position: absolute;
+    bottom: 1rem;
+    z-index: 100;
+}

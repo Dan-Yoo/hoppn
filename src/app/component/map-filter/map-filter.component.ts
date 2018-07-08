@@ -15,16 +15,21 @@ export class MapFilterComponent implements OnInit {
     @Input() lat: number;
     @Input() radius: number;
 
-    filters = [
-        { value: 'airport', viewValue: 'Airport' },
-        { value: 'aquarium', viewValue: 'Aquarium' },
-        { value: 'bank', viewValue: 'Bank' },
+    // confirmed working
+    types = [
+        { value: 'clothing_store', viewValue: 'Clothing Store' },
+        { value: 'museum', viewValue: 'Museum' },
+        { value: 'shopping_mall', viewValue: 'Shopping Mall' },
         { value: 'cafe', viewValue: 'Cafe' },
         { value: 'bar', viewValue: 'Bar' },
-        { value: 'bus_station', viewValue: 'Bus Station' },
-        { value: 'embassy', viewValue: 'Embassy' }
+        { value: 'spa', viewValue: 'Spa' },
+        { value: 'restaurant', viewValue: 'Restaurant' },
+        { value: 'store', viewValue: 'Store' },
+        { value: 'park', viewValue: 'Park' },
+        { value: 'night_club', viewValue: 'Night Club' }
     ];
 
+    // for food related types, forward to yelp api in the future
     placeSearchForm: FormGroup;
 
     constructor(private placesService: PlacesService,
@@ -36,7 +41,7 @@ export class MapFilterComponent implements OnInit {
             long: [this.long, null],
             lat: [this.lat, null],
             radius: [this.radius, null],
-            filter: [''],
+            type: [''],
             isOpen: [false]
         });
     }

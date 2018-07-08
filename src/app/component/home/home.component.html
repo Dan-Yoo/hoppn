@@ -17,9 +17,10 @@
                 <mat-icon>place</mat-icon>
             </ng-template>
             <div class="mat-tab-content" style="position: relative">
-                <button (click)="useCurrentLocation()" mat-fab color="primary" style="position: absolute; bottom: 1rem; right: 0; z-index: 100;">
+                <button (click)="useCurrentLocation()" mat-fab color="primary" class="map-overlay-button" style="right: 0;">
                     <mat-icon>my_location</mat-icon>
                 </button>
+                <button (click)="getPlaces()" mat-raised-button class="translate-center-x map-overlay-button" color="primary">Search</button>
                 <!-- find way to hide + - zoom buttons on map -->
                 <agm-map class="h-100" [clickableIcons]="false" [streetViewControl]="false" [zoom]="15" [latitude]="lat" [longitude]="long"
                     (mapClick)="setCenterMarker($event)">
