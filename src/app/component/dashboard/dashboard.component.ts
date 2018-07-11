@@ -13,6 +13,7 @@ export class DashboardComponent implements OnInit {
 
     places$: Observable<UserPlace[]>;
     placeDetail$: Observable<PlaceDetail>;
+    placeDetail: any;
 
     constructor(private placeService: PlacesService,
         private userPlaceService: UserPlacesService) {
@@ -24,5 +25,6 @@ export class DashboardComponent implements OnInit {
 
     seeDetails(placeId: string): void {
         this.placeDetail$ = this.placeService.getPlaceDetail({ placeid: placeId });
+        this.placeDetail$.subscribe(res => this.placeDetail = res);
     }
 }

@@ -22,6 +22,7 @@ import { MAT_LABEL_GLOBAL_OPTIONS, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angula
 import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { MapFilterComponent } from './component/map-filter/map-filter.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { PlaceDetailComponent } from './component/place-detail/place-detail.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     HomeComponent,
     SpinnerComponent,
     DashboardComponent,
-    MapFilterComponent
+    MapFilterComponent,
+    PlaceDetailComponent
   ],
   imports: [
     BrowserModule,
